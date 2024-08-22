@@ -19,6 +19,9 @@ mongoose.connect(process.env.MONGO_URI, {
     console.error('Connection error', err);
 });
 
+app.get("/", (req, res) => {
+    res.send("Hello from the backend!");
+  });
 
 const transactionRoutes = require("./routes/transactionRoutes");
 app.use("/", transactionRoutes);
