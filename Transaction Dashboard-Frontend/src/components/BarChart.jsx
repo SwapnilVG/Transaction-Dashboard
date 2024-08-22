@@ -25,42 +25,50 @@ const BarChart = ({ selectedMonth }) => {
         const response = await fetch(
           `https://transactiondashboardbackend-swapnil-gadekars-projects.vercel.app/api/barChart?month=${selectedMonth}`
         );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
 
         // Assuming data is an array of objects with 'range' and 'count' properties
         const labels = data.map((item) => item.range);
         const counts = data.map((item) => item.count);
 
-        setBarChartData({
+        setBarChartData((prevData) => ({
+          ...prevData,
           labels,
           datasets: [
             {
-              ...barChartData.datasets[0],
+              ...prevData.datasets[0],
               data: counts,
             },
           ],
-        });
+        }));
       } catch (error) {
         console.error("Error fetching bar chart data:", error);
       }
     };
 
     fetchBarChartData();
-  }, [selectedMonth, barChartData]);
+  }, [selectedMonth]);
 
   return (
     <div className="m-5">
-      <div className=" font-bold text-black text-4xl text-center m-5">
+      <div className="font-bold text-black text-4xl text-center m-5">
         Bar Chart Stats - {selectedMonth}
       </div>
       <div className="m-5">
-        {barChartData ? (
+        {barChartData.labels.length > 0 ? (
           <Bar
             data={barChartData}
             options={{
-              legend: {
-                display: true,
-                position: "right",
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "right",
+                },
               },
               scales: {
                 x: {
@@ -79,7 +87,7 @@ const BarChart = ({ selectedMonth }) => {
             }}
           />
         ) : (
-          <div>Loading chart data</div>
+          <div>Loading chart data...</div>
         )}
       </div>
     </div>
