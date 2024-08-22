@@ -23,7 +23,7 @@ const BarChart = ({ selectedMonth }) => {
     const fetchBarChartData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/barChart?month=${selectedMonth}`
+          `https://transactiondashboardbackend-efz07ce9p-swapnil-gadekars-projects.vercel.app/api/barChart?month=${selectedMonth}`
         );
         const data = await response.json();
 
