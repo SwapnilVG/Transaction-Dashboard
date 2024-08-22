@@ -1,5 +1,5 @@
 import React from "react";
-import PerPage from "./perPage";
+import PerPage from "./PerPage";
 
 const TransactionTable = ({
   transactions,
