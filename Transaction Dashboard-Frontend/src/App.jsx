@@ -18,7 +18,7 @@ const App = () => {
   const fetchTransactions = async () => {
     try {
       const response = await axios.get(
-        `https://transactiondashboardbackend-efz07ce9p-swapnil-gadekars-projects.vercel.app/api/transactions`,
+        `https://transactiondashboardbackend-swapnil-gadekars-projects.vercel.app/api/transactions`,
         {
           params: {
             month: selectedMonth,
