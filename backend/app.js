@@ -19,7 +19,7 @@ mongoose.connect(process.env.MONGO_URI, {
     console.error('Connection error', err);
 });
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
     res.send("Hello from the backend!");
   });
 
